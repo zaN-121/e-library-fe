@@ -11,8 +11,6 @@ const List = ({data, refetch}) => {
     const onNavigateToEdit = (id) => () => {
         navigate();
     }
-    console.log("bab")
-    console.log(data)
 
     const onDelete = (id) => () => {
         const isOk = window.confirm("Anda yakin ingin menghapus course ini?");
@@ -23,9 +21,12 @@ const List = ({data, refetch}) => {
     return (
         <Row>
             {data?.map((item, index) => (
-                <Col key={item.bookId} xs={12} sm={6} md={4}>
-                    <BookItem 
+                <Col xs={12} sm={6} md={4}>
+                    <BookItem
+                        key={item.bookId} 
                         data={item}
+                        onDelete={onDelete(item.bookId)}
+                        onNavigateToEdit={onNavigateToEdit(item.bookId)}
                     />
                 </Col>
             ))}

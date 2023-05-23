@@ -1,6 +1,6 @@
 import React from "react"
 import {StyledListItem} from "./styles"
-import { Button, ButtonGroup, Card, Col, Image, Row, Table } from "react-bootstrap"
+import { Button, ButtonGroup, Card } from "react-bootstrap"
 
 const BookItem = ({data, onNavigateToEdit, onDelete}) => {
     console.log("Book: " + data.authorName)
@@ -12,6 +12,10 @@ const BookItem = ({data, onNavigateToEdit, onDelete}) => {
                     <Card.Title className="text-truncate">{data.title}</Card.Title>
                     <Card.Text>{data.authorName}</Card.Text>
                 </Card.Body>
+                <ButtonGroup>
+                    <Button variant="primary" onClick={onNavigateToEdit} >Edit</Button>
+                    <Button variant="danger" onClick={onDelete} >Detele</Button>
+                </ButtonGroup>
             </Card>
         </>   
     )
