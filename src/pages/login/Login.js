@@ -1,6 +1,6 @@
 import {Button, Form} from "react-bootstrap";
 import useLogin from "./useLogin";
-import {onChangeText} from "../../util/onChangeText";
+import {onChangeText} from "../../util/eventHandlers";
 import {LoginContainer} from './Login.styled'
 const Login = () => {
     const {getter, setter} = useLogin()
