@@ -13,6 +13,7 @@ const Menu = ({menu, selectedMenu, setSelectedMenu, setSelectedSubMenu}) => {
                     setSelectedSubMenu("default")
                 } else {
                     setSelectedMenu(menu.name)
+                    setSelectedSubMenu("Search Book")
                 }
             }}>
                 <Image

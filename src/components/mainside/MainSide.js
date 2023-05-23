@@ -1,5 +1,5 @@
 import {MainSideContainer} from "./MainSde.styled";
-import BookList from "../features-component/booklist/BookList";
+import BookList from "../features-component/BookList";
 import AddBook from "../features-component/addbook/AddBook";
 import DeleteBook from "../features-component/deletebook/DeleteBook";
 import UpdateBook from "../features-component/updatebook/UpdateBook";

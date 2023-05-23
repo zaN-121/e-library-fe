@@ -20,17 +20,16 @@ export default (ListComponent, opts) => {
                 </StyledContainer>
             )
         }
-
+        console.log(data?.data?.content)
         return (
             <>
                 <StyledContainer>
-                    <Button variant="success" onClick={() => navigate(routeToAdd)}>Add {label} </Button>
-                    {data?.data?.length > 0 ? (
-                    <ListComponent data={data?.data} refetch={refetch} {...props} />
+                    {data?.data?.content?.length > 0 ? (
+                    <ListComponent data={data?.data?.content} refetch={refetch} {...props} />
                     ) : <EmptyState text={`Data ${label} kosong...`} /> }
                 </StyledContainer>
                 <Pagination 
-                    totalPage={data?.totalPage}
+                    totalPage={data?.data?.totalPages}
                     onChangeCurrentPage={setCurrentPage}
                     currentPage={currentPage}
                 />
