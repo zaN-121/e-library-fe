@@ -11,6 +11,7 @@ import { getCategories } from "../../../services/categoryApi";
 const List = ({data, refetch}) => {
     const navigate = useNavigate()
     const {fetchMutation} = useFetchMutation(deleteBookById, refetch)
+    const {fetchMutation: update} = useFetchMutation(updateBookById)
     const [showModal, setShowModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
     const [formData, setFormData] = useState({
@@ -62,34 +63,44 @@ const List = ({data, refetch}) => {
             stock: formData.stock,
             category: formData.category.categoryId
         };
-        // Call the function to update the book data
-        updateBookById(updatedBook)
-        .then(() => {
-            // Reset the form and close the modal after successful update
-            setFormData({
-                title: "",
-                image: null,
-                authorName: "",
-                publisher: "",
-                publicationYear: "",
-                stock: 0,
-                category: ""
-            });
+        delete updatedBook.image
+        update(updatedBook)
+        // // Call the function to update the book data
+        // updateBookById(updatedBook)
+        // .then(() => {
+        //     // Reset the form and close the modal after successful update
+            // setFormData({
+            //     title: "",
+            //     image: null,
+            //     authorName: "",
+            //     publisher: "",
+            //     publicationYear: "",
+            //     stock: 0,
+            //     category: ""
+            // });
             setShowModal(false);
-            // Refetch the book data to update the list
-            refetch();
-        })
-        .catch((error) => {
-            // Handle any errors if there are any
-            console.log("Error updating book:", error);
-        });
+        //     // Refetch the book data to update the list
+        //     refetch();
+        // })
+        // .catch((error) => {
+        //     // Handle any errors if there are any
+        //     console.log("Error updating book:", error);
+        // });
     }
 
     const handleInputChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-        });
+        const { name, value, type, files } = e.target;
+        if (type === "file") {
+            setFormData({
+                ...formData,
+                [name]: files[0] 
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
     }
 
     return (
@@ -177,7 +188,15 @@ const List = ({data, refetch}) => {
                     </option>
                 ))}
             </FormSelect> */}
-            </Form.Group>
+                </Form.Group>
+                <Form.Group>
+                <Form.Label>Image</Form.Label>
+                    <Form.Control
+                        type="file"
+                        name="image"
+                        onChange={handleInputChange}
+                    />
+                </Form.Group>
             </Form>
             </Modal.Body>
             <Modal.Footer>
