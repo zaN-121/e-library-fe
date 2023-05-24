@@ -12,7 +12,6 @@ export default (ListComponent, opts) => {
         const {label, routeToAdd, query} = opts
         const [currentPage, setCurrentPage] = useState(1)
         const {data, loading, refetch} = useFetchQuery(query, currentPage)
-
         if (loading) {
             return (
                 <StyledContainer>
@@ -20,7 +19,6 @@ export default (ListComponent, opts) => {
                 </StyledContainer>
             )
         }
-        console.log(data?.data?.content)
         return (
             <>
                 <StyledContainer>

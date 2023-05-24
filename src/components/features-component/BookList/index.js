@@ -27,6 +27,7 @@ const List = ({data, refetch}) => {
                         data={item}
                         onDelete={onDelete(item.bookId)}
                         onNavigateToEdit={onNavigateToEdit(item.bookId)}
+                        onDetail={{}}
                     />
                 </Col>
             ))}

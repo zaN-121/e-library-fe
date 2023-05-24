@@ -7,6 +7,9 @@ import StyledContainer from "../../StyledContainer"
 import { StyledTitle } from "./styles"
 import { Button, ButtonGroup, Form } from "react-bootstrap"
 import FormInput from "../../FormInput"
+import useFetchQueryCategory from "../../../hook/useFetchQueryCategory"
+import { FormGroup, FormLabel, FormSelect } from "react-bootstrap";
+import { useState } from "react"
 
 const FORM_LIST = [
     { id: "title", label: "Title", type: "text", placeholder: "Enter book title" },
@@ -15,16 +18,17 @@ const FORM_LIST = [
     { id: "publisher", label: "Publisher", type: "text", placeholder: "Enter book publisher"},
     { id: "publicationYear", label: "Publication Year", type: "text", placeholder: "Enter book publication year"},
     { id: "stock", label: "Stock", type: "number", placeholder: "Enter book stock"},
-    { id: "categoryId", label: "Category", type: "text", placeholder: "Enter book category"},
 ]
 
 const AddBook = () => {
     const {getter, setter} = useAddBook()
     const {fetchMutation} = useFetchMutation(
         addBook,
-        console.log("Ok")
+        () => console.log("Ok")
     )
 
+    const {data} = useFetchQueryCategory(getCategories, 1)
+    console.log(data.data)
     const submitHandler = (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -38,7 +42,7 @@ const AddBook = () => {
         fetchMutation(formData)
     }
 
-    const {data} = useFetchQuery(getCategories)
+   
     return (
         <StyledContainer>
             <StyledTitle>Add Book</StyledTitle>
@@ -53,6 +57,19 @@ const AddBook = () => {
                         key={item.id}
                     />
                 )) }
+                <FormLabel>{"Category"}</FormLabel>
+                <FormSelect 
+                    onChange={setter.categoryId}
+                    defaultValue={getter?.categoryId}
+                >
+                    <option value={""}>-- Category --</option>
+                    {data?.data?.content?.map((item) => {
+                        return (
+                            <option value={item.categoryId}>{item.name}
+                            </option>
+                        )
+                    })}
+                </FormSelect>   
                 <ButtonGroup className="pt-3">
                     <Button variant="success" onClick={submitHandler} disabled={getter.isDisable}>
                         Submit

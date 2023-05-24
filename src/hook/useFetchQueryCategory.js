@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useFetchQuery = (query, params) => {
+const useFetchQueryCategory = (query, params) => {
     const [data, setData] = useState({})
     const [fetching, setFetching] = useState(true)
 
@@ -8,12 +8,10 @@ const useFetchQuery = (query, params) => {
         setFetching(true)
     }
 
-    useEffect(() => {
-        refetch()
-    }, [params])
 
     useEffect(() => {
         const fetchQuery = async () => {
+            console.log("masuk get category")
             try {
                 setFetching(true)
                 const {data: response} = await query(params)
@@ -36,4 +34,4 @@ const useFetchQuery = (query, params) => {
     }
 }
 
-export default useFetchQuery
+export default useFetchQueryCategory

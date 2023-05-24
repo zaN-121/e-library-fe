@@ -1,11 +1,11 @@
 import React from "react";
-import { FormGroup, FormLabel } from "react-bootstrap";
+import { FormGroup, FormLabel, FormSelect } from "react-bootstrap";
 
 const FormSelect = (props) => {
     const {label, placeholder, onChange, value, values} = props
     return (
         <>
-            <FormGroup className="mb-3">
+        
                 <FormLabel>{label}</FormLabel>
                 <FormSelect 
                     onChange={onChange}
@@ -19,10 +19,9 @@ const FormSelect = (props) => {
                             </option>
                         )
                     })}
-                </FormSelect>
-            </FormGroup>
-        </>
-    )
+                </FormSelect>   
+        </>        
+         )
 }
 
 export default FormSelect
