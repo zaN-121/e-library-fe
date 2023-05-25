@@ -2,39 +2,39 @@ import useFetchMutation from "../../../hook/useFetchMutation"
 import {deleteBookById, getBooks, updateBookById} from "../../../services/bookApi"
 import BookItem from "./components/index"
 import withPaginationList from "../../../hoc/withPaginationList"
-import { Col, Row, Modal, Button, Form, FormSelect } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Col, Row, Modal, Button, Form} from "react-bootstrap";
 import { useState } from "react";
 import useFetchQueryCategory from "../../../hook/useFetchQueryCategory";
 import { getCategories } from "../../../services/categoryApi";
 
 const List = ({data, refetch}) => {
-    const navigate = useNavigate()
     const {fetchMutation} = useFetchMutation(deleteBookById, refetch)
     const {fetchMutation: update} = useFetchMutation(updateBookById)
     const [showModal, setShowModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
     const [formData, setFormData] = useState({
-        title: "",
-        image: null,
-        authorName: "",
-        publisher: "",
-        publicationYear: "",
+        name: "",
+        author: "",
+        thumbnail: null,
+        page: 0,
+        releaseYear: "",
+        language: "",
         stock: 0,
         category: ""
     });
 
-    const {data: categoryData} = useFetchQueryCategory(getCategories, 1)
-    console.log("Category:", categoryData);
+    // const {data: categoryData} = useFetchQueryCategory(getCategories, 1)
+    // console.log("Category:", categoryData);
 
     const onEdit = (book) => {
         setSelectedBook(book);
         setFormData({
-            title: book.title,
-            image: book.image,
-            authorName: book.authorName,
-            publisher: book.publisher,
-            publicationYear: book.publicationYear,
+            name: book.name,
+            author: book.author,
+            thumbnail: book.thumbnail,
+            page: book.page,
+            releaseYear: book.releaseYear,
+            language: book.language,
             stock: book.stock,
             category: book.category.categoryId
         });
@@ -55,15 +55,16 @@ const List = ({data, refetch}) => {
     const handleModalSave = () => {
         const updatedBook = {
             bookId: selectedBook.bookId,
-            title: formData.title,
-            image: formData.image,
-            authorName: formData.authorName,
-            publisher: formData.publisher,
-            publicationYear: formData.publicationYear,
+            name: formData.name,
+            author: formData.author,
+            thumbnail: formData.thumbnail,
+            page: formData.page,
+            releaseYear: formData.releaseYear,
+            language: formData.language,
             stock: formData.stock,
             category: formData.category.categoryId
         };
-        delete updatedBook.image
+        delete updatedBook.thumbnail
         update(updatedBook)
         // // Call the function to update the book data
         // updateBookById(updatedBook)
@@ -124,11 +125,11 @@ const List = ({data, refetch}) => {
             <Modal.Body>
             <Form>
                 <Form.Group>
-                    <Form.Label>Title</Form.Label>
+                    <Form.Label>Name</Form.Label>
                     <Form.Control
                         type="text"
-                        name="title"
-                        value={formData.title}
+                        name="name"
+                        value={formData.name}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
@@ -136,26 +137,35 @@ const List = ({data, refetch}) => {
                     <Form.Label>Author</Form.Label>
                     <Form.Control
                         type="text"
-                        name="authorName"
-                        value={formData.authorName}
+                        name="author"
+                        value={formData.author}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Publisher</Form.Label>
+                    <Form.Label>Page</Form.Label>
                     <Form.Control
-                        type="text"
-                        name="publisher"
-                        value={formData.publisher}
+                        type="number"
+                        name="page"
+                        value={formData.page}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Publication Year</Form.Label>
+                    <Form.Label>Release Year</Form.Label>
                     <Form.Control
                         type="text"
-                        name="publicationYear"
-                        value={formData.publicationYear}
+                        name="releaseYear"
+                        value={formData.releaseYear}
+                        onChange={handleInputChange}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Language</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="language"
+                        value={formData.language}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
@@ -190,10 +200,10 @@ const List = ({data, refetch}) => {
             </FormSelect> */}
                 </Form.Group>
                 <Form.Group>
-                <Form.Label>Image</Form.Label>
+                <Form.Label>Thumbnail</Form.Label>
                     <Form.Control
                         type="file"
-                        name="image"
+                        name="thumbnail"
                         onChange={handleInputChange}
                     />
                 </Form.Group>

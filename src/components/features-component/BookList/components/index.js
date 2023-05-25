@@ -10,8 +10,8 @@ const BookItem = ({data, onNavigateToEdit, onDelete}) => {
             <Card style={{ width: '18rem' }} className="mb-3 p-3">
                 <Card.Img variant="top" src="https://placehold.co/40x40" />
                 <Card.Body>
-                    <Card.Title className="text-truncate">{data.title}</Card.Title>
-                    <Card.Text>{data.authorName}</Card.Text>
+                    <Card.Title className="text-truncate">{data.name}</Card.Title>
+                    <Card.Text>{data.author}</Card.Text>
                 </Card.Body>
                 <ButtonGroup>
                     <Button variant="outline-success" onClick={handleShow} size="m">Detail</Button>
@@ -25,13 +25,13 @@ const BookItem = ({data, onNavigateToEdit, onDelete}) => {
                 <Modal.Title>Detail Buku</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Title: {data.title}</p>
-                <p>Author: {data.authorName}</p>
-                <p>Publisher: {data.publisher}</p>
-                <p>Publication Year: {data.publicationYear}</p>
+                <p>Book Name: {data.name}</p>
+                <p>Author: {data.author}</p>
+                <p>Page: {data.page}</p>
+                <p>Release Year: {data.releaseYear}</p>
+                <p>Language: {data.language}</p>
                 <p>Stock: {data.stock}</p>
                 <p>Category: {data.category.name}</p>
-                {/* Tambahkan informasi tambahan atau detail buku di sini */}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Tutup</Button>

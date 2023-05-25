@@ -2,33 +2,35 @@ import { useEffect, useState } from "react"
 import { onChangeFile, onChangeText } from "../../../util/eventHandlers"
 
 const useAddBook = () => {
-    const [title, setTittle] = useState("")
-    const [image, setImage] = useState()
-    const [authorName, setAuthorName] = useState("")
-    const [publisher, setPublisher] = useState("")
-    const [publicationYear, setPublicationYear] = useState("")
+    const [name, setName] = useState("")
+    const [author, setAuthor] = useState("")
+    const [thumbnail, setThumbnail] = useState()
+    const [page, setPage] = useState(0)
+    const [releaseYear, setReleaseYear] = useState("")
+    const [language, setLanguage] = useState("")
     const [stock, setStock] = useState(0)
     const [categoryId, setCategoryId] = useState("")
     const [isDisable, setDisable] = useState(true);
 
-    const getter = {title, image, authorName, publisher, publicationYear, stock, categoryId, isDisable}
+    const getter = {name, author, thumbnail, page, releaseYear, language, stock, categoryId, isDisable}
     const setter = {
-        title: onChangeText(setTittle),
-        image: onChangeFile(setImage),
-        authorName: onChangeText(setAuthorName),
-        publisher: onChangeText(setPublisher),
-        publicationYear: onChangeText(setPublicationYear),
+        name: onChangeText(setName),
+        author: onChangeText(setAuthor),
+        thumbnail: onChangeFile(setThumbnail),
+        page: onChangeText(setPage),
+        releaseYear: onChangeText(setReleaseYear),
+        language: onChangeText(setLanguage),
         stock: onChangeText(setStock),
         categoryId: onChangeText(setCategoryId)
     }
 
     useEffect(() => {
-        if (title && image && authorName && publisher && publicationYear && stock && categoryId) {
+        if (name && author && thumbnail && page && releaseYear && language && stock && categoryId) {
             setDisable(false)
         } else {
             setDisable(true)
         }
-    }, [title, image, authorName, publisher, publicationYear, stock, categoryId])
+    }, [name, author, thumbnail, page, releaseYear, language, stock, categoryId])
 
     return {
         getter, setter

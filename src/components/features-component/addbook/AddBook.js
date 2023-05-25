@@ -1,22 +1,21 @@
 import useAddBook from "./useAddBook"
 import useFetchMutation from "../../../hook/useFetchMutation"
 import {addBook} from "../../../services/bookApi"
-import useFetchQuery from "../../../hook/useFetchQuery"
 import { getCategories } from "../../../services/categoryApi"
 import StyledContainer from "../../StyledContainer"
 import { StyledTitle } from "./styles"
 import { Button, ButtonGroup, Form } from "react-bootstrap"
 import FormInput from "../../FormInput"
 import useFetchQueryCategory from "../../../hook/useFetchQueryCategory"
-import { FormGroup, FormLabel, FormSelect } from "react-bootstrap";
-import { useState } from "react"
+import {FormLabel, FormSelect } from "react-bootstrap";
 
 const FORM_LIST = [
-    { id: "title", label: "Title", type: "text", placeholder: "Enter book title" },
-    { id: "image", label: "Image", type: "file", placeholder: "Choose image book"},
-    { id: "authorName", label: "Author", type: "text", placeholder: "Enter book author"},
-    { id: "publisher", label: "Publisher", type: "text", placeholder: "Enter book publisher"},
-    { id: "publicationYear", label: "Publication Year", type: "text", placeholder: "Enter book publication year"},
+    { id: "name", label: "Name", type: "text", placeholder: "Enter book title" },
+    { id: "author", label: "Author", type: "text", placeholder: "Enter book author"},
+    { id: "thumbnail", label: "Thumbnail", type: "file", placeholder: "Choose Thumbnail book"},
+    { id: "page", label: "Page", type: "number", placeholder: "Enter book page"},
+    { id: "releaseYear", label: "Release Year", type: "text", placeholder: "Enter book release year"},
+    { id: "language", label: "Language", type: "text", placeholder: "Enter book language"},
     { id: "stock", label: "Stock", type: "number", placeholder: "Enter book stock"},
 ]
 
@@ -32,11 +31,12 @@ const AddBook = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         const formData = new FormData()
-        formData.append("title", getter.title)
-        formData.append("image", getter.image)
-        formData.append("authorName", getter.authorName)
-        formData.append("publisher", getter.publisher)
-        formData.append("publicationYear", getter.publicationYear)
+        formData.append("name", getter.name)
+        formData.append("author", getter.author)
+        formData.append("thumbnail", getter.thumbnail)
+        formData.append("page", getter.page)
+        formData.append("releaseYear", getter.releaseYear)
+        formData.append("language", getter.language)
         formData.append("stock", getter.stock)
         formData.append("categoryId", getter.categoryId)
         fetchMutation(formData)
