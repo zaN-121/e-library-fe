@@ -1,19 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import {Route, Routes} from "react-router-dom";
-import Login from "./pages/login/Login";
-import Dashboard from "./pages/dashboard/Dashboard";
+import {Route, RouterProvider, Routes} from "react-router-dom";
+import navigationConfigs from './navigation/navigationConfigs';
 
 
 
 function App() {
   return (
     <div>
+      
+      <RouterProvider router={navigationConfigs} />
 
-      <Routes>
+      {/* <Routes>
         <Route path={"/login"} element={<Login />} />
         <Route path={"/"} element={<Dashboard />} />
-      </Routes>
+      </Routes> */}
 
     </div>
   );

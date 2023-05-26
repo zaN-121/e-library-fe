@@ -1,0 +1,19 @@
+{
+  "book": [
+    {
+      "bookId": "bce69186-30cc-4eff-92a2-4cf8248c8d42",
+      "name": "SangPemimpin",
+      "author": "Ryan Hasbie",
+      "thumbnail": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fid.lovepik.com%2Fimages%2Fbooks.html&psig=AOvVaw1sKgJduJtQ7OyOSzTnidzr&ust=1685075327472000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKjGgfXQj_8CFQAAAAAdAAAAABAE",
+      "page": 200,
+      "releaseYear": "2001",
+      "language": "India",
+      "isAvailable": "AVAILABLE",
+      "stock": 10,
+      "category": {
+        "categoryId": "e84d86f6-1205-4593-befd-9f9f585014f5",
+        "name": "Horor"
+      }
+    }
+  ]
+}

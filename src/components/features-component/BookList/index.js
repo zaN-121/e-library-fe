@@ -2,7 +2,7 @@ import useFetchMutation from "../../../hook/useFetchMutation"
 import {deleteBookById, getBooks, updateBookById} from "../../../services/bookApi"
 import BookItem from "./components/index"
 import withPaginationList from "../../../hoc/withPaginationList"
-import { Col, Row, Modal, Button, Form} from "react-bootstrap";
+import { Col, Row, Modal, Button, Form, FormSelect} from "react-bootstrap";
 import { useState } from "react";
 import useFetchQueryCategory from "../../../hook/useFetchQueryCategory";
 import { getCategories } from "../../../services/categoryApi";
@@ -23,7 +23,8 @@ const List = ({data, refetch}) => {
         category: ""
     });
 
-    // const {data: categoryData} = useFetchQueryCategory(getCategories, 1)
+    
+    const {data: categoryData} = useFetchQueryCategory(getCategories, 1)
     // console.log("Category:", categoryData);
 
     const onEdit = (book) => {
@@ -36,7 +37,10 @@ const List = ({data, refetch}) => {
             releaseYear: book.releaseYear,
             language: book.language,
             stock: book.stock,
-            category: book.category.categoryId
+            category:  {
+                name: book.category.name,
+                categoryId: book.category.categoryId
+            }
         });
         setShowModal(true);
     }
@@ -62,9 +66,18 @@ const List = ({data, refetch}) => {
             releaseYear: formData.releaseYear,
             language: formData.language,
             stock: formData.stock,
-            category: formData.category.categoryId
+            categoryId: formData.category.categoryId
         };
-        delete updatedBook.thumbnail
+        // const reader = new FileReader()
+        // reader.onload = () => {
+        //     const base64Thumbnail = reader.result
+        //     update({
+        //         ...updatedBook,
+        //         thumbnail: base64Thumbnail
+        //     })
+        // }
+        // reader.readAsDataURL(thumbnail)
+        // delete updatedBook.thumbnail
         update(updatedBook)
         // // Call the function to update the book data
         // updateBookById(updatedBook)
@@ -90,13 +103,22 @@ const List = ({data, refetch}) => {
     }
 
     const handleInputChange = (e) => {
-        const { name, value, type, files } = e.target;
+        const { name, value, type, files} = e.target;
         if (type === "file") {
             setFormData({
                 ...formData,
                 [name]: files[0] 
             });
         } else {
+            if (name === "category") {
+                setFormData({
+                    ...formData,
+                    [name]: {
+                        name: e.target[e.target.selectedIndex].innerText,
+                        categoryId: e.target.value
+                    }
+                })
+            }
             setFormData({
                 ...formData,
                 [name]: value
@@ -180,12 +202,20 @@ const List = ({data, refetch}) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Category</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="category"
-                        value={formData.category}
-                        onChange={handleInputChange}
-                    />
+                    <FormSelect 
+                    onChange={handleInputChange}
+                    defaultValue={formData.category}
+                    onClick={(e) => console.log(e.target[e.target.selectedIndex].innerText)}
+                    >
+                    <option value={""}>{formData.category.name}</option>
+                    {categoryData?.data?.content?.map((item) => {
+                        if (item.name === formData.category.name) return false 
+                        return (
+                            <option value={item.categoryId}>{item.name}
+                            </option>
+                        )
+                    })}
+                </FormSelect> 
             {/* <FormSelect
                 name="category"
                 value={formData.category}

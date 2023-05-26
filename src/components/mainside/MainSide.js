@@ -5,7 +5,7 @@ import DeleteBook from "../features-component/deletebook/DeleteBook";
 import UpdateBook from "../features-component/updatebook/UpdateBook";
 import DefaultFeature from "../features-component/default/DefaultFeature";
 
-const MainSide = ({selectedSubMenu}) => {
+const MainSide = ({selectedSubMenu, setSelectedSubMenu}) => {
     let ComponentFeature
 
     switch (selectedSubMenu) {
@@ -13,7 +13,7 @@ const MainSide = ({selectedSubMenu}) => {
             ComponentFeature = <BookList/>
             break
         case "Add Book":
-            ComponentFeature = <AddBook/>
+            ComponentFeature = <AddBook setSelectedSubMenu={setSelectedSubMenu}/>
             break
         case "Delete Book":
             ComponentFeature = <DeleteBook />

@@ -8,6 +8,7 @@ import { Button, ButtonGroup, Form } from "react-bootstrap"
 import FormInput from "../../FormInput"
 import useFetchQueryCategory from "../../../hook/useFetchQueryCategory"
 import {FormLabel, FormSelect } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"
 
 const FORM_LIST = [
     { id: "name", label: "Name", type: "text", placeholder: "Enter book title" },
@@ -19,11 +20,12 @@ const FORM_LIST = [
     { id: "stock", label: "Stock", type: "number", placeholder: "Enter book stock"},
 ]
 
-const AddBook = () => {
+const AddBook = ({setSelectedSubMenu}) => {
     const {getter, setter} = useAddBook()
+    const navigate = useNavigate()
     const {fetchMutation} = useFetchMutation(
         addBook,
-        () => console.log("Ok")
+        () => navigate("/")
     )
 
     const {data} = useFetchQueryCategory(getCategories, 1)
@@ -40,6 +42,7 @@ const AddBook = () => {
         formData.append("stock", getter.stock)
         formData.append("categoryId", getter.categoryId)
         fetchMutation(formData)
+        setSelectedSubMenu("Search Book")
     }
 
    

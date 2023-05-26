@@ -8,7 +8,7 @@ const BookItem = ({data, onNavigateToEdit, onDelete}) => {
     return (
         < >
             <Card style={{ width: '18rem' }} className="mb-3 p-3">
-                <Card.Img variant="top" src="https://placehold.co/40x40" />
+                <Card.Img variant="top" src={data.thumbnail} style={{height: "40px", width: "100%"}}/>
                 <Card.Body>
                     <Card.Title className="text-truncate">{data.name}</Card.Title>
                     <Card.Text>{data.author}</Card.Text>
