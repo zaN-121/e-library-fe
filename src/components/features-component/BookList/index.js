@@ -16,6 +16,7 @@ const List = ({data, refetch}) => {
         name: "",
         author: "",
         thumbnail: null,
+        thumbnailUrl: "",
         page: 0,
         releaseYear: "",
         language: "",
@@ -32,7 +33,7 @@ const List = ({data, refetch}) => {
         setFormData({
             name: book.name,
             author: book.author,
-            thumbnail: book.thumbnail,
+            thumbnailUrl: book.thumbnail,
             page: book.page,
             releaseYear: book.releaseYear,
             language: book.language,
@@ -49,6 +50,7 @@ const List = ({data, refetch}) => {
         const isOk = window.confirm("Are you sure for deleted this book?");
         if (isOk) {
             fetchMutation(id)
+            refetch()
         }
     }
 
@@ -62,6 +64,7 @@ const List = ({data, refetch}) => {
             name: formData.name,
             author: formData.author,
             thumbnail: formData.thumbnail,
+            thumbnailUrl: formData.thumbnailUrl,
             page: formData.page,
             releaseYear: formData.releaseYear,
             language: formData.language,
@@ -100,6 +103,7 @@ const List = ({data, refetch}) => {
         //     // Handle any errors if there are any
         //     console.log("Error updating book:", error);
         // });
+        refetch()
     }
 
     const handleInputChange = (e) => {

@@ -5,6 +5,7 @@ import StyledContainer from "../components/StyledContainer";
 import { Button } from "react-bootstrap";
 import EmptyState from "../components/EmptyState";
 import Pagination from "../components/Pagination"
+import {Levels} from "react-activity";
 
 export default (ListComponent, opts) => {
     return (props) => {
@@ -14,9 +15,11 @@ export default (ListComponent, opts) => {
         const {data, loading, refetch} = useFetchQuery(query, currentPage)
         if (loading) {
             return (
-                <StyledContainer>
-                    <p className="lead">loading...</p>
-                </StyledContainer>
+                <div style={{height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <Levels color={"red"} size={80}/>
+                    {/*<p className="lead">loading...</p>*/}
+                </div>
+
             )
         }
         return (

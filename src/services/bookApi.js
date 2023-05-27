@@ -19,7 +19,8 @@ export const addBook = (data) => {
 export const updateBookById = (data) => {
     return api.put(`/book/${data.bookId}`, data, {
         headers: {
-            "Authorization": getToken()
+            "Authorization": getToken(),
+            "Content-Type": "multipart/form-data"
         }
     })
 }

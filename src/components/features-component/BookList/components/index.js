@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, ButtonGroup, Card, Modal } from "react-bootstrap"
+import {Thumbnail} from "./styles";
 
 const BookItem = ({data, onNavigateToEdit, onDelete}) => {
     const [showModal, setShowModal] = useState(false)
@@ -8,7 +9,22 @@ const BookItem = ({data, onNavigateToEdit, onDelete}) => {
     return (
         < >
             <Card style={{ width: '18rem' }} className="mb-3 p-3">
-                <Card.Img variant="top" src={data.thumbnail} style={{height: "40px", width: "100%"}}/>
+                {/*<Card.Img variant="top" src={data.thumbnail} style={{height: "40px", width: "100%"}}/>*/}
+                {/*<div style={{*/}
+                {/*    height: "150px",*/}
+                {/*    width: "100%",*/}
+                {/*    backgroundImage: `url(${data.thumbnail})`,*/}
+                {/*    backgroundSize: "contain",*/}
+                {/*    backgroundRepeat: "no-repeat"*/}
+                {/*}}></div>*/}
+                <div style={{
+                    height: "150px",
+                    width: "100%"}}
+                >
+                    <Thumbnail
+                        image={data.thumbnail}
+                    />
+                </div>
                 <Card.Body>
                     <Card.Title className="text-truncate">{data.name}</Card.Title>
                     <Card.Text>{data.author}</Card.Text>
